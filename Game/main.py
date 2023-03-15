@@ -62,8 +62,8 @@ def restart(ball, left_paddle, right_paddle, background):
         ball.y = ball.y_start
 
 
-right_paddle = Paddle(980, 250, 20, 100, screen)  # 250 + 100 = 350. 350 + 250 = 600/2 = 300 or halfway
-left_paddle = Paddle(0, 250, 20, 100, screen)  # Start at 0 since width is 20: 0 - 20 = 980 - 1000
+right_paddle = Paddle(980, 250, 20, 100, screen)  
+left_paddle = Paddle(0, 250, 20, 100, screen)  
 
 background = Background(5, 0, screen)
 
