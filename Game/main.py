@@ -28,7 +28,7 @@ def collisions(ball, left_paddle, right_paddle, background):
         background.right_hits += 1
 
     elif ball.x - ball.radius == left_paddle.x + left_paddle.width and (
-        (left_paddle.y < ball.y + ball.radius < left_paddle.y + left_paddle.height or left_paddle.y < ball.y - ball.radius < left_paddle.y + left_paddle.height) and (ball.x_speed < 0)):  # Last and fixes simultaneous collision with wall and paddle
+        (left_paddle.y < ball.y + ball.radius < left_paddle.y + left_paddle.height or left_paddle.y < ball.y - ball.radius < left_paddle.y + left_paddle.height) and (ball.x_speed < 0)):  #Last and fixes simultaneous collision with wall and paddle
         ball.x_speed *= -1
 
         middle_y = (left_paddle.y + left_paddle.height + left_paddle.y) / 2
