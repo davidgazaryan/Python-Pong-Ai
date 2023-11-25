@@ -1,8 +1,8 @@
 import pygame
 import time
-from Game.Background import Background
-from Game.Ball import Ball
-from Game.Paddle import Paddle
+from Background import Background
+from Ball import Ball
+from Paddle import Paddle
 
 screen = pygame.display.set_mode((1000, 600))
 
@@ -15,7 +15,9 @@ def collisions(ball, left_paddle, right_paddle, background):
     elif ball.y - ball.radius <= 0:
         ball.y_speed *= -1
 
-    if ball.x + ball.radius == right_paddle.x and (right_paddle.y < ball.y - ball.radius < right_paddle.y + right_paddle.height or right_paddle.y < ball.y + ball.radius < right_paddle.y + right_paddle.height) and (ball.x_speed > 0):  # Last and fixes simultaneous collision with wall and paddle
+    if ball.x + ball.radius == right_paddle.x and (
+        (right_paddle.y < ball.y - ball.radius < right_paddle.y + right_paddle.height
+        or right_paddle.y < ball.y + ball.radius < right_paddle.y + right_paddle.height) and (ball.x_speed > 0)):  # Last and fixes simultaneous collision with wall and paddle
         ball.x_speed *= -1
 
         middle_y = (right_paddle.y + right_paddle.height + right_paddle.y) / 2
@@ -25,7 +27,8 @@ def collisions(ball, left_paddle, right_paddle, background):
 
         background.right_hits += 1
 
-    elif ball.x - ball.radius == left_paddle.x + left_paddle.width and (left_paddle.y < ball.y + ball.radius < left_paddle.y + left_paddle.height or left_paddle.y < ball.y - ball.radius < left_paddle.y + left_paddle.height) and (ball.x_speed < 0):  # Last and fixes simultaneous collision with wall and paddle
+    elif ball.x - ball.radius == left_paddle.x + left_paddle.width and (
+        (left_paddle.y < ball.y + ball.radius < left_paddle.y + left_paddle.height or left_paddle.y < ball.y - ball.radius < left_paddle.y + left_paddle.height) and (ball.x_speed < 0)):  #Last and fixes simultaneous collision with wall and paddle
         ball.x_speed *= -1
 
         middle_y = (left_paddle.y + left_paddle.height + left_paddle.y) / 2
@@ -35,10 +38,12 @@ def collisions(ball, left_paddle, right_paddle, background):
 
         background.left_hits += 1
 
-    if ball.x + ball.radius >= 1000 and (ball.y + ball.radius < 100 or ball.y - ball.radius > 500) and (ball.y - ball.radius < right_paddle.y or ball.y + ball.radius > right_paddle.y + right_paddle.height) and (ball.x_speed > 0):
+    if ball.x + ball.radius >= 1000 and (ball.y + ball.radius < 100 or ball.y - ball.radius > 500) and (
+        (ball.y - ball.radius < right_paddle.y or ball.y + ball.radius > right_paddle.y + right_paddle.height) and (ball.x_speed > 0)):
         ball.x_speed *= -1
 
-    elif ball.x - ball.radius <= 0 and (ball.y + ball.radius < 100 or ball.y - ball.radius > 500) and (ball.y - ball.radius < left_paddle.y or ball.y + ball.radius > left_paddle.y + left_paddle.height) and (ball.x_speed < 0):
+    elif ball.x - ball.radius <= 0 and (ball.y + ball.radius < 100 or ball.y - ball.radius > 500) and (
+        (ball.y - ball.radius < left_paddle.y or ball.y + ball.radius > left_paddle.y + left_paddle.height) and (ball.x_speed < 0)):
         ball.x_speed *= -1
 
 
