@@ -102,7 +102,6 @@ def eval_genomes(genomes, config):
             game = PongGame()
             game.training_ai(genome1, genome2, config)
 
-
 def run_neat(config):
     p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
@@ -113,7 +112,6 @@ def run_neat(config):
     winner = p.run(eval_genomes, 50)
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
-
 
 def test_ai(config):
     width, height = 1000, 600
