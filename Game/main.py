@@ -6,6 +6,17 @@ from Paddle import Paddle
 
 screen = pygame.display.set_mode((1000, 600))
 
+class GameConfig():
+    def __init__(self, screen):
+        self.screen = screen
+
+        self.left_paddle = Paddle(0, 250, 20, 100, screen)
+        self.right_paddle = Paddle(980, 250, 20, 100, screen)
+
+        self.background = Background(5, 0, screen)
+
+        self.ball = Ball(500, 300, 15, 5, screen)
+
 
 def collisions(ball, left_paddle, right_paddle, background):
 
@@ -66,14 +77,7 @@ def restart(ball, left_paddle, right_paddle, background):
         ball.y_speed = 0
         ball.y = ball.y_start
 
-
-right_paddle = Paddle(980, 250, 20, 100, screen)  
-left_paddle = Paddle(0, 250, 20, 100, screen)  
-
-background = Background(5, 0, screen)
-
-ball = Ball(500, 300, 15, 5, screen)
-
+game = GameConfig(screen=screen)
 
 def main():
     pygame.init()
@@ -93,23 +97,23 @@ def main():
         if game_active:
             screen.fill('black')
 
-            background.update()
+            game.background.update()
 
-            right_paddle.update()
-            left_paddle.update()
+            game.right_paddle.update()
+            game.left_paddle.update()
 
-            ball.update()
+            game.ball.update()
 
-            collisions(ball, left_paddle, right_paddle, background)
-            restart(ball, left_paddle, right_paddle, background)
+            collisions(game.ball, game.left_paddle, game.right_paddle, game.background)
+            restart(game.ball, game.left_paddle, game.right_paddle, game.background)
 
-        if background.right_score == 5:
+        if game.background.right_score == 5:
             game_active = False
 
             screen.fill((8, 8, 8))
-            background.draw_background()
-            right_paddle.draw_paddle()
-            left_paddle.draw_paddle()
+            game.background.draw_background()
+            game.right_paddle.draw_paddle()
+            game.left_paddle.draw_paddle()
 
             winner = pygame.font.Font(None, 60)
             winner = winner.render('Right    Wins', False, (255, 250, 250))
@@ -121,17 +125,17 @@ def main():
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_r]:
-                background.right_score = 0
-                background.left_score = 0
+                game.background.right_score = 0
+                game.background.left_score = 0
                 game_active = True
 
-        elif background.left_score == 5:
+        elif game.background.left_score == 5:
             game_active = False
 
             screen.fill((8, 8, 8))
-            background.draw_background()
-            right_paddle.draw_paddle()
-            left_paddle.draw_paddle()
+            game.background.draw_background()
+            game.right_paddle.draw_paddle()
+            game.left_paddle.draw_paddle()
 
             winner = pygame.font.Font(None, 60)
             winner = winner.render('Left    Wins', False, (255, 250, 250))
@@ -143,8 +147,8 @@ def main():
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_r]:
-                background.left_score = 0
-                background.right_score = 0
+                game.background.left_score = 0
+                game.background.right_score = 0
                 game_active = True
 
         pygame.display.update()
